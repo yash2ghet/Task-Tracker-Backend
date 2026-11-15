@@ -1,4 +1,3 @@
-
 import {
   pgTable,
   text,
@@ -19,7 +18,7 @@ export const user = pgTable("user", {
 
   image: text("image"),
 
-  role: text("role").default("user"),
+  role: text("role").default("employee").notNull(),
 
   banned: boolean("banned").default(false),
 
