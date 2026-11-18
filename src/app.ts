@@ -88,6 +88,8 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "../lib/auth";
 import { env } from "./config/env";
 import dashboardRouter from "./routes/dashboard.routes";
+import notificationRouter from "./routes/notification.routes";
+import taskAssignmentRouter from "./routes/task-assignment.routes";
 
 import {
   requireAuth,
@@ -139,5 +141,9 @@ app.use(
   checkPermission("dashboard:view"),
   dashboardRouter
 );
+
+app.use("/api/notifications", notificationRouter);
+
+app.use("/api/tasks", taskAssignmentRouter);
 
 export default app;

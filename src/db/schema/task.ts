@@ -5,6 +5,7 @@ import {
   timestamp,
   index,
 } from "drizzle-orm/pg-core";
+import { user } from "./user";
 
 export const taskStatusEnum = pgEnum("task_status", [
   "pending",
@@ -26,9 +27,11 @@ export const task = pgTable(
     updatedAt: timestamp("updated_at")
       .defaultNow()
       .notNull(),
+    assignedTo: text("assigned_to").references(() => user.id),
   },
   (table) => [
     index("task_status_idx").on(table.status),
     index("task_created_at_idx").on(table.createdAt),
+    index("task_assigned_to_idx").on(table.assignedTo),
   ],
 );
